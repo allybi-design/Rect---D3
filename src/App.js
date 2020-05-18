@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect, useState } from 'react';
+import { select } from "d3";
 
-function App() {
+const App = () => {
+  const svgRef = useRef()
+  
+  const [data, setData] = useState([45, 40, 35, 30, 25])
+
+  useEffect(() => {
+    const svg = select(svgRef.current)
+    svg
+      .selectAll("circle")
+      .data(data)
+      .join("circle")
+      .attr("r", value => value)
+      .attr("cx", value => value * 4)
+      .attr("cy", value => value * 2)
+      .attr("stroke", "red")
+  },[data])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <h1>hello to D3 tut</h1>
+      <svg ref={svgRef} />
+      <button onClick={() => setData(data.map(value => value+5))}>inc data by 5</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
