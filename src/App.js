@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { select, line, curveCardinal, axisBottom, scaleLinear, axisLeft } from "d3";
+import { select, scaleBand, axisBottom, scaleLinear, axisLeft } from "d3";
 
 const App = () => {
   const svgRef = useRef()
@@ -9,32 +9,43 @@ const App = () => {
   useEffect(() => {
     const svg = select(svgRef.current)
 
-    const xScale = scaleLinear().domain([0, data.length - 1]).range([0, 300])
-    const yScale = scaleLinear().domain([0, 150]).range([150, 0])
+    const xScale = scaleBand()
+      .domain(data
+        .map((value, index) => index))
+      .range([0, 300])
+      .padding(0.5)
+
+    const yScale = scaleLinear()
+      .domain([0, 150])
+      .range([150, 0])
+
+    const colorScale = scaleLinear()
+      .domain([75, 100, 125, 150])
+      .range(["green", "yellow", "orange", "red"])
+      .clamp(true)
 
     svg
       .select(".x-axis")
       .style("transform", "translateY(150px)")
-      .call(axisBottom(xScale).ticks(data.length).tickFormat(index => index + 1))
+      .call(axisBottom(xScale).ticks(data.length))
 
     svg
       .selectAll(".y-axis")
       // .style("transform", "translateX(300px")
       .call(axisLeft(yScale))
 
-    const myLine = line()
-      .x((value, index) => xScale(index))
-      .y(yScale)
-      .curve(curveCardinal)
-  
     svg
-      .selectAll(".line")
-      .data([data])
-      .join("path")
-      .attr("class", "line")
-      .attr("d", myLine)
-      .attr("fill", "none")
-      .attr("stroke", "red")
+      .selectAll(".bar")
+      .data(data)
+      .join("rect")
+      .attr("class", "rect")
+      .style("transform", "scale(1, -1)")
+      .attr("x", (value, index) => xScale(index))
+      .attr("y", -150)
+      .attr("width", xScale.bandwidth())
+      .transition()
+      .attr("fill", colorScale)
+      .attr("height", value => 150 - yScale(value))
   }, [data])
 
   return (
