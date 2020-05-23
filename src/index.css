@@ -7,9 +7,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 .container {
-  width: 1640px;
+  width:960px;
   margin: 0 auto;
-   display: flex;
+  display: flex;
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
@@ -23,8 +23,12 @@ button {
 }
 
 svg {
-  background-color: #dadada;
+  /* background-color: #e68122; */
   overflow: visible;
   display: block;
-  width:100%
+  width:100%;
+}
+
+.label {
+  content: url("http://www.example.com/test.png");
 }
