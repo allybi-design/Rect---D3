@@ -3,9 +3,7 @@ import RacingBarChart from "./RacingBarChart"
 import useInterval from "./useInterval"
 import getRandIndex from "./getRandIndex";
 
-
 const App = () => {
-
   const initData = [
     {
       name: "alpha",

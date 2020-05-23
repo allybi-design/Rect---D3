@@ -47,13 +47,14 @@ const RacingBarChart = ({ data }) => {
       .join(enter =>
         enter.append("text").attr("y", (entry, index) => yScale(index))
       )
-      .text(entry => ` - ${entry.name} (${entry.value} meters)`)
+      
+      .text(entry => `🐌 - ${entry.name} (${entry.value} meters)`)
       .attr("class", "label")
       .attr("x", 10)
       .attr("height", yScale.bandwidth())
       .transition()
       .attr("width", entry => xScale(entry.value))
-      .attr("y", (entry, index) => yScale(index) + yScale.bandwidth()-5)
+      .attr("y", (entry, index) => yScale(index) + yScale.bandwidth()-25)
 
   }, [data, dimensions]);
 
