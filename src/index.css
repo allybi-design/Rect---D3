@@ -30,7 +30,3 @@ svg {
   height: 500px;
   font-size: 2rem;;
 }
-
-.label {
-  content: url("http://www.example.com/test.png");
-}
