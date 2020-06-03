@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TreeChart from "./TreeChart"
+import ForceTreeChart from "./ForceTreeChart"
 
 const App = () => {
   const initData = {
@@ -47,14 +47,12 @@ const App = () => {
     ]
   }
 
-  const [data, setData] = useState(initData)
+  const [data] = useState(initData)
 
   return (
     <div className="container">
-      <h1>Animated Tree Chart</h1>
-      <TreeChart data={data} />
-      <button onClick={() => setData(initData)}>Updata data</button>
-
+      <h1>Animated Force Tree Chart</h1>
+      <ForceTreeChart data={data} />
     </div>
   )
 }
