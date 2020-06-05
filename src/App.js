@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import BrushChart from "./BrushChart"
-
+import BrushChartChild from "./BrushChartChild"
 
 const App = () => {
 
-  const [data, setData] = useState([10,25,30,40,25,60])
+  const [data, setData] = useState(
+    Array.from({ length: 30 }).map(() => Math.round(Math.random() * 100))
+  )
 
   return (
     <div className="container">
       <h1>Sub-selection with d3-brush</h1>
-      <BrushChart data={data}/>
-      <button onClick={() => setData([...data, Math.round(Math.random()*100)])}>Add Data Node</button>
+      <BrushChart data={data}>
+        {selection => <BrushChartChild data={data} selection={selection} />}
+      </BrushChart>
+      <button onClick={() => setData([...data, Math.round(Math.random() * 100)])}>Add Data Node</button>
     </div>
   )
 }
