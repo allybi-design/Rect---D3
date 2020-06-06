@@ -29,3 +29,12 @@ svg {
   height: 300px;
   overflow: visible;
 }
+
+.field {
+  display: inline-block;
+  margin: 0 0.5em;
+}
+
+.field input {
+  margin-right: 0.5em;
+}
